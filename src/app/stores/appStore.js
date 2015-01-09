@@ -1,9 +1,7 @@
 'use strict';
 
-var appDispatcher = require('../dispatcher/dispatcher.js');
-var eventEmitter = require('events').EventEmitter;
-var constants = require('../constants/constants.js');
-var _ = require('underscore');
+var reflux = require('reflux');
+var appActions = require('../actions/appActions.js');
 
 var _userList = [{
     name: 'Howard',
@@ -16,41 +14,19 @@ var _userList = [{
     age: 26
 }, ];
 
-var appStore = _.extend({}, eventEmitter.prototype, {
-    getUserList: function() {
-        return _userList;
-    },
-    addUser: function(user) {
-        _userList.push(user);
-    },
-    deleteUser: function(index) {
-        _userList.splice(index, 1);
-    },
-    emitChange: function() {
-        this.emit('change');
-    },
-    addChangeListener: function(callback) {
-        this.on('change', callback);
-    },
-    removeChangeListener: function(callback) {
-        this.removeListener('change', callback);
-    },
-});
-
-appDispatcher.register(function(payload) {
-    var action = payload.action;
-    switch (action.actionType) {
-        case constants.ADD_USER:
-            appStore.addUser(action.data);
-            break;
-        case constants.DELETE_USER:
-            appStore.deleteUser(action.data);
-            break;
-        default:
-            return true;
-    }
-    appStore.emitChange();
-    return true;
+var appStore = reflux.createStore({
+	listenables: appActions,
+	onAddUser: function(user){
+		_userList.push(user);
+		this.trigger(_userList);
+	},
+	onDeleteUser: function(index){
+		_userList.splice(index, 1);
+		this.trigger(_userList);
+	},
+	getUserList: function(){
+		return _userList;
+	}
 });
 
 module.exports = appStore;
