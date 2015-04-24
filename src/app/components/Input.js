@@ -11,13 +11,11 @@ var Input = React.createClass({
 			name: this.refs.name.getDOMNode().value,
 			age: +this.refs.age.getDOMNode().value
 		};
-		if(!newUser.name || !newUser.age){
-			console.log('Please enter complete data');
-		}else{
+		if(newUser.name && newUser.age){
 			this.refs.name.getDOMNode().value = '';
 			this.refs.age.getDOMNode().value = '';
 			appActions.addUser(newUser);
-		}		
+		}
 	},
 
 	render: function() {

@@ -14,7 +14,7 @@ var _userList = [{
 }, {
     name: 'Amy',
     age: 26
-}, ];
+}];
 
 var appStore = _.extend({}, eventEmitter.prototype, {
     getUserList: function() {
