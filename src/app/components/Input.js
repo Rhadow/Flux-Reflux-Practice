@@ -1,6 +1,6 @@
 'use strict';
 
-var React = require('react');
+var React = require('react/addons');
 var appActions = require('../actions/appActions.js');
 
 var Input = React.createClass({
@@ -18,13 +18,18 @@ var Input = React.createClass({
 		}
 	},
 
+	shouldComponentUpdate() {
+     return React.addons.PureRenderMixin.shouldComponentUpdate.apply(this, arguments);
+  },
+
 	render: function() {
+		console.log("Input rendered!!");
 		return (
 			/* jshint ignore:start */
 			<div>
-			    <input type="text" placeholder="Please enter your name" ref="name" />
-			    <input type="text" placeholder="Please enter your age" ref="age" />
-			    <input type="button" value="Add" onClick={this.handleSubmit} />
+			  <input type="text" placeholder="Please enter your name" ref="name" />
+			  <input type="text" placeholder="Please enter your age" ref="age" />
+			  <input type="button" value="Add" onClick={this.handleSubmit} />
 			</div>
 			/* jshint ignore:end */
 		);

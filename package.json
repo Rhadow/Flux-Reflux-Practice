@@ -2,7 +2,8 @@
   "name": "fluxnote",
   "version": "0.0.1",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "dev": "webpack-dev-server --devtool eval --progress --colors --hot --content-base src"
   },
   "dependencies": {
     "flux": "^2.0.1",
@@ -21,10 +22,10 @@
     "gulp-uglify": "1.0.1",
     "gulp-useref": "~1.0.1",
     "gulp-util": "~3.0.1",
+    "immutable": "^3.7.2",
     "jest-cli": "^0.4.0",
     "jshint-stylish": "0.4.0",
-    "react": "^0.12.0",
-    "react-router": "~0.11.6",
+    "react": "^0.13.0",
     "react-tools": "^0.13.2",
     "reactify": "~0.15.2",
     "reflux": "~0.1.13",

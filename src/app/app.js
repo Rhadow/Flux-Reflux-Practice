@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 'use strict';
 
 var React = require('react'),
@@ -12,7 +10,7 @@ ExampleApp = React.createClass({
     getInitialState: function(){
         return {
             users: appStore.getUserList()
-        };        
+        };
     },
     componentWillMount: function(){
         appStore.addChangeListener(this._onChange);
@@ -22,10 +20,10 @@ ExampleApp = React.createClass({
     },
     render: function() {
         return (
-        	/*jshint ignore:start */
+        	  /*jshint ignore:start */
             <div>
                 <UserList users={this.state.users}/>
-            	<Input />
+            	  <Input />
             </div>
             /*jshint ignore:end */
         );

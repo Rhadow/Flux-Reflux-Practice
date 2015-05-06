@@ -5,26 +5,29 @@ var eventEmitter = require('events').EventEmitter;
 var constants = require('../constants/constants.js');
 var _ = require('underscore');
 
-var _userList = [{
-    name: 'Howard',
-    age: 27
-}, {
-    name: 'Shaun',
-    age: 22
-}, {
-    name: 'Amy',
-    age: 26
-}];
+import Immutable from 'immutable';
 
 var appStore = _.extend({}, eventEmitter.prototype, {
+    _userList: Immutable.fromJS(
+        [{
+            name: 'Howard',
+            age: 27
+        }, {
+            name: 'Shaun',
+            age: 22
+        }, {
+            name: 'Amy',
+            age: 26
+        }]
+    ),
     getUserList: function() {
-        return _userList;
+        return this._userList;
     },
     addUser: function(user) {
-        _userList.push(user);
+        this._userList = this._userList.push(Immutable.fromJS(user));
     },
     deleteUser: function(index) {
-        _userList.splice(index, 1);
+        this._userList = this._userList.splice(index, 1);
     },
     emitChange: function() {
         this.emit('change');
