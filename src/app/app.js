@@ -1,39 +1,42 @@
 'use strict';
 
-var React = require('react'),
-    UserList = require('./components/UserList.js'),
-    Input = require('./components/Input.js'),
-    appStore = require('./stores/appStore.js'),
-    ExampleApp;
+import React from 'react';
+import BaseComponent from './components/BaseComponent.js';
+import UserList from './components/UserList.js';
+import Input from './components/Input.js';
+import appStore from './stores/appStore.js';
 
-ExampleApp = React.createClass({
-    getInitialState: function(){
-        return {
+
+class ExampleApp extends BaseComponent{
+    constructor(props) {
+        super(props);
+        this.state = {
             users: appStore.getUserList()
         };
-    },
-    componentWillMount: function(){
+        this._bind('_onChange');
+    }
+    componentWillMount() {
         appStore.addChangeListener(this._onChange);
-    },
-    componentWillUnmount: function(){
+    }
+    componentWillUnmount() {
         appStore.removeChangeListener(this._onChange);
-    },
-    render: function() {
-        return (
-        	  /*jshint ignore:start */
-            <div>
-                <UserList users={this.state.users}/>
-            	  <Input />
-            </div>
-            /*jshint ignore:end */
-        );
-    },
-    _onChange: function(){
+    }
+    _onChange() {
         this.setState({
             users: appStore.getUserList()
         });
     }
-});
+    render() {
+      return (
+          /*jshint ignore:start */
+          <div>
+              <UserList users={this.state.users}/>
+              <Input />
+          </div>
+          /*jshint ignore:end */
+      );
+    }
+}
 
 React.render(
     /*jshint ignore:start */

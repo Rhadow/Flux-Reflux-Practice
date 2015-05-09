@@ -1,15 +1,20 @@
 'use strict';
 
-var React = require('react/addons');
-var UserListItem = require('./UserListItem.js');
+import React from 'react/addons';
+import BaseComponent from './BaseComponent.js';
+import UserListItem from './UserListItem.js';
 
-var UserList = React.createClass({
+class UserList extends BaseComponent {
+
+	constructor(props) {
+		super(props);
+	}
 
 	shouldComponentUpdate() {
-   return React.addons.PureRenderMixin.shouldComponentUpdate.apply(this, arguments);
-  },
+		return React.addons.PureRenderMixin.shouldComponentUpdate.apply(this, arguments);
+	}
 
-	render: function() {
+	render() {
 		var listItemNode = this.props.users.map(function(user, i){
 			return (
 				/* jshint ignore:start */
@@ -21,19 +26,18 @@ var UserList = React.createClass({
 		return (
 			/* jshint ignore:start */
 			<table className="table">
-			    <thead>
-			        <th>Name</th>
-			        <th>Age</th>
-			        <th>Delete</th>
-			    </thead>
-			    <tbody>
-			        {listItemNode}
-			    </tbody>
+				<thead>
+					<th>Name</th>
+					<th>Age</th>
+					<th>Delete</th>
+				</thead>
+				<tbody>
+					{listItemNode}
+				</tbody>
 			</table>
 			/* jshint ignore:end */
 		);
 	}
+}
 
-});
-
-module.exports = UserList;
+export default UserList;

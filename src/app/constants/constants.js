@@ -5,4 +5,4 @@ var constants = {
 	DELETE_USER: 'DELETE_USER'
 };
 
-module.exports = constants;
+export default constants;
