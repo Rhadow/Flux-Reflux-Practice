@@ -11,9 +11,13 @@ class SearchBar extends BaseComponent {
         this._bind('_handleSearchClick');
     }
 
+    shouldComponentUpdate() {
+		return React.addons.PureRenderMixin.shouldComponentUpdate.apply(this, arguments);
+	}
+
     _handleSearchClick(e) {
         e.preventDefault();
-		var accountToSearch = React.findDOMNode(this.refs.account).value;
+		let accountToSearch = React.findDOMNode(this.refs.account).value;
 		if(accountToSearch){
             React.findDOMNode(this.refs.account).value = '';
             apiActions.getGithubInfo(accountToSearch);
@@ -21,6 +25,7 @@ class SearchBar extends BaseComponent {
     }
 
     render() {
+        console.log('SearchBar rendered!!');
         return (
             <div>
                 <label>Enter Your Github Account: </label>

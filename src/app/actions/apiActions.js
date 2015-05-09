@@ -6,7 +6,7 @@ import constants from '../constants/constants.js';
 
 var apiActions = {
     getGithubInfo(account) {
-        var url = `https://api.github.com/users/${account}`;
+        let url = `https://api.github.com/users/${account}`;
         $.ajax({
             url: url,
             success: (data) => {
@@ -18,7 +18,7 @@ var apiActions = {
             error: (err) => {
                 appDispatcher.handleAPIAction({
                     actionType: constants.GITHUB_GET_USER_FAIL,
-                    data: undefined
+                    data: account
                 });
             },
             dataType: 'json'

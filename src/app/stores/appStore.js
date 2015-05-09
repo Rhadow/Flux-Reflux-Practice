@@ -43,7 +43,7 @@ appStore = _.extend({}, eventEmitter.prototype, {
 });
 
 appDispatcher.register((payload) => {
-    var action = payload.action;
+    let action = payload.action;
     switch (action.actionType) {
         case constants.APP_ADD_USER:
             appStore.addUser(action.data);

@@ -20,6 +20,9 @@ GithubStore = _.extend({}, eventEmitter.prototype, {
             this._currentInfo = Immutable.fromJS(info);
         }
     },
+    showErrorMessage(account) {
+        alert(`Cannot find user: ${account}`);
+    },
     emitChange() {
         this.emit('change');
     },
@@ -36,6 +39,9 @@ appDispatcher.register((payload) => {
     switch (action.actionType) {
         case constants.GITHUB_GET_USER_SUCCESS:
             GithubStore.saveInfo(action.data);
+            break;
+        case constants.GITHUB_GET_USER_FAIL:
+            GithubStore.showErrorMessage(action.data);
             break;
         default:
             return true;

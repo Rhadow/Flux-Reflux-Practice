@@ -15,7 +15,7 @@ class UserList extends BaseComponent {
 	}
 
 	render() {
-		var listItemNode = this.props.users.map(function(user, i){
+		let listItemNode = this.props.users.map(function(user, i){
 			return (
 				/* jshint ignore:start */
 				<UserListItem user={user} key={i} id={i}/>

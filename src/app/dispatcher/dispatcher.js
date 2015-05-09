@@ -5,16 +5,16 @@ import Flux from 'flux';
 var Dispatcher = Flux.Dispatcher,
     appDispatcher = new Dispatcher();
 
-appDispatcher.handleViewAction = function(action) {
-    this.dispatch({
-    	actionType: 'VIEW_ACTION',
+appDispatcher.handleViewAction = (action) => {
+    appDispatcher.dispatch({
+    	source: 'VIEW_ACTION',
     	action: action
     });
 };
 
-appDispatcher.handleAPIAction = function(action) {
-    this.dispatch({
-    	actionType: 'API_ACTION',
+appDispatcher.handleAPIAction = (action) => {
+    appDispatcher.dispatch({
+    	source: 'API_ACTION',
     	action: action
     });
 };

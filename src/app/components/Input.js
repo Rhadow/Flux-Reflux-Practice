@@ -17,7 +17,7 @@ class Input extends BaseComponent {
 
 	_handleSubmit(e) {
 		e.preventDefault();
-		var newUser = {
+		let newUser = {
 			name: React.findDOMNode(this.refs.name).value,
 			age: +React.findDOMNode(this.refs.age).value
 		};
@@ -29,7 +29,7 @@ class Input extends BaseComponent {
 	}
 
 	render() {
-		console.log("Input rendered!!");
+		console.log('Input rendered!!');
 		return (
 			/* jshint ignore:start */
 			<div>

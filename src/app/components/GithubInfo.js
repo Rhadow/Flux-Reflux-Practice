@@ -15,7 +15,7 @@ class GithubInfo extends BaseComponent {
 	}
 
     _renderContent() {
-        var resultHTML, info;
+        let resultHTML, info;
         if(this.props.data.get('login')) {
             info = this.props.data;
             resultHTML = (
@@ -47,7 +47,7 @@ class GithubInfo extends BaseComponent {
     }
 
     render() {
-        var content = this._renderContent();
+        let content = this._renderContent();
         console.log(`${this.props.data.get('login')} rendered!!`);
         return (
             <div>
