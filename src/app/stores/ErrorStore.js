@@ -7,18 +7,16 @@ import _ from 'underscore';
 import Immutable from 'immutable';
 
 var eventEmitter = events.EventEmitter,
-    GithubStore;
+    ErrorStore;
 
-GithubStore = _.extend({}, eventEmitter.prototype, {
-    _currentInfo: Immutable.fromJS({}),
-    getCurrentInfo() {
-        return this._currentInfo;
+ErrorStore = _.extend({}, eventEmitter.prototype, {
+    _errorNames: [],
+    getErrorNames() {
+        return this._errorNames;
     },
-    saveInfo(info) {
-        let isIdentical = Immutable.is(this._currentInfo, Immutable.fromJS(info));
-        if(!isIdentical){
-            this._currentInfo = Immutable.fromJS(info);
-        }
+    showErrorMessage(account) {
+        this._errorNames.push(account);
+        alert(`Cannot find user: ${account}`);
     },
     emitChange() {
         this.emit('change');
@@ -34,14 +32,14 @@ GithubStore = _.extend({}, eventEmitter.prototype, {
 appDispatcher.register((payload) => {
     let action = payload.action;
     switch (action.actionType) {
-        case constants.GITHUB_GET_USER_SUCCESS:
-            GithubStore.saveInfo(action.data);
+        case constants.GITHUB_GET_USER_FAIL:
+            ErrorStore.showErrorMessage(action.data);
             break;
         default:
             return true;
     }
-    GithubStore.emitChange();
+    ErrorStore.emitChange();
     return true;
 });
 
-export default GithubStore;
+export default ErrorStore;

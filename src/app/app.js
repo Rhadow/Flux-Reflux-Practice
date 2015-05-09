@@ -13,6 +13,7 @@ import GithubInfo from './components/GithubInfo.js';
 //Store
 import AppStore from './stores/AppStore.js';
 import GithubStore from './stores/GithubStore.js';
+import ErrorStore from './stores/ErrorStore.js';
 
 
 class ExampleApp extends BaseComponent{
@@ -37,19 +38,20 @@ class ExampleApp extends BaseComponent{
             users: AppStore.getUserList(),
             githubInfo: GithubStore.getCurrentInfo()
         });
+        console.log(`Error names: ${ErrorStore.getErrorNames()}`);
     }
     render() {
-      return (
-          /*jshint ignore:start */
-          <div>
-              <UserList users={this.state.users}/>
-              <Input />
-              <hr/>
-              <SearchBar/>
-              <GithubInfo data={this.state.githubInfo}/>
-          </div>
-          /*jshint ignore:end */
-      );
+        return (
+            /*jshint ignore:start */
+            <div>
+                <UserList users={this.state.users}/>
+                <Input />
+                <hr/>
+                <SearchBar/>
+                <GithubInfo data={this.state.githubInfo}/>
+            </div>
+            /*jshint ignore:end */
+        );
     }
 }
 
