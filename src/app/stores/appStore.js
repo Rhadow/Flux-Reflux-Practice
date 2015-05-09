@@ -1,13 +1,15 @@
 'use strict';
 
-var appDispatcher = require('../dispatcher/dispatcher.js');
-var eventEmitter = require('events').EventEmitter;
-var constants = require('../constants/constants.js');
-var _ = require('underscore');
-
+import appDispatcher from '../dispatcher/dispatcher.js';
+import events from 'events';
+import constants from '../constants/constants.js';
+import _ from 'underscore';
 import Immutable from 'immutable';
 
-var appStore = _.extend({}, eventEmitter.prototype, {
+var eventEmitter = events.EventEmitter,
+    appStore;
+
+appStore = _.extend({}, eventEmitter.prototype, {
     _userList: Immutable.fromJS(
         [{
             name: 'Howard',
@@ -20,27 +22,27 @@ var appStore = _.extend({}, eventEmitter.prototype, {
             age: 26
         }]
     ),
-    getUserList: function() {
+    getUserList() {
         return this._userList;
     },
-    addUser: function(user) {
+    addUser(user) {
         this._userList = this._userList.push(Immutable.fromJS(user));
     },
-    deleteUser: function(index) {
+    deleteUser(index) {
         this._userList = this._userList.splice(index, 1);
     },
-    emitChange: function() {
+    emitChange() {
         this.emit('change');
     },
-    addChangeListener: function(callback) {
+    addChangeListener(callback) {
         this.on('change', callback);
     },
-    removeChangeListener: function(callback) {
+    removeChangeListener(callback) {
         this.removeListener('change', callback);
     },
 });
 
-appDispatcher.register(function(payload) {
+appDispatcher.register((payload) => {
     var action = payload.action;
     switch (action.actionType) {
         case constants.ADD_USER:
@@ -56,4 +58,4 @@ appDispatcher.register(function(payload) {
     return true;
 });
 
-module.exports = appStore;
+export default appStore;

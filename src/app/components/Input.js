@@ -18,12 +18,12 @@ class Input extends BaseComponent {
 	_handleSubmit(e) {
 		e.preventDefault();
 		var newUser = {
-			name: this.refs.name.getDOMNode().value,
-			age: +this.refs.age.getDOMNode().value
+			name: React.findDOMNode(this.refs.name).value,
+			age: +React.findDOMNode(this.refs.age).value
 		};
 		if(newUser.name && newUser.age){
-			this.refs.name.getDOMNode().value = '';
-			this.refs.age.getDOMNode().value = '';
+			React.findDOMNode(this.refs.name).value = '';
+			React.findDOMNode(this.refs.age).value = '';
 			appActions.addUser(newUser);
 		}
 	}
