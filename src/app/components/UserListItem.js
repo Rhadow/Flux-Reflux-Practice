@@ -21,7 +21,7 @@ class UserListItem extends BaseComponent {
 	}
 
 	render() {
-		console.log(this.props.user.get('name') + " rendered!!");
+		console.log(`${this.props.user.get('name')} rendered!!`);
 		return (
 			/* jshint ignore:start */
 			<tr>

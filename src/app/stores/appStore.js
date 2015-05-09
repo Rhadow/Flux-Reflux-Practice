@@ -45,10 +45,10 @@ appStore = _.extend({}, eventEmitter.prototype, {
 appDispatcher.register((payload) => {
     var action = payload.action;
     switch (action.actionType) {
-        case constants.ADD_USER:
+        case constants.APP_ADD_USER:
             appStore.addUser(action.data);
             break;
-        case constants.DELETE_USER:
+        case constants.APP_DELETE_USER:
             appStore.deleteUser(action.data);
             break;
         default:

@@ -24,6 +24,7 @@
     "gulp-util": "~3.0.1",
     "immutable": "^3.7.2",
     "jest-cli": "^0.4.0",
+    "jquery": "^2.1.4",
     "jshint-stylish": "0.4.0",
     "react": "^0.13.0",
     "react-tools": "^0.13.2",
