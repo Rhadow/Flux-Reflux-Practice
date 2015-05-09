@@ -25,9 +25,9 @@ class UserListItem extends BaseComponent {
 		return (
 			/* jshint ignore:start */
 			<tr>
-                <td>{this.props.user.get('name')}</td>
-		        <td>{this.props.user.get('age')}</td>
-		        <td><input type="button" value="delete" onClick={this._handleDelete}/></td>
+			    <td>{this.props.user.get('name')}</td>
+				<td>{this.props.user.get('age')}</td>
+				<td><input type="button" value="delete" onClick={this._handleDelete}/></td>
 		    </tr>
 	    /* jshint ignore:end */
 		);
