@@ -12,7 +12,7 @@ class GithubInfo extends BaseComponent {
 
     shouldComponentUpdate() {
         return React.addons.PureRenderMixin.shouldComponentUpdate.apply(this, arguments);
-	}
+    }
 
     _renderContent() {
         let resultHTML, info;

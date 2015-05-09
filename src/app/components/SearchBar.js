@@ -21,7 +21,7 @@ class SearchBar extends BaseComponent {
 		if(accountToSearch){
             React.findDOMNode(this.refs.account).value = '';
             apiActions.getGithubInfo(accountToSearch);
-		}
+        }
     }
 
     render() {
