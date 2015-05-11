@@ -38,7 +38,9 @@ class ExampleApp extends BaseComponent{
             users: AppStore.getUserList(),
             githubInfo: GithubStore.getCurrentInfo()
         });
-        console.log(`Error names: ${ErrorStore.getErrorNames()}`);
+        if(ErrorStore.getErrorNames().length){
+            console.log(`Error names: ${ErrorStore.getErrorNames()}`);
+        }
     }
     render() {
         return (

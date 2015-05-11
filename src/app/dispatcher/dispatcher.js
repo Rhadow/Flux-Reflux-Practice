@@ -1,22 +1,22 @@
 'use strict';
 
-import Flux from 'flux';
+import {Dispatcher} from 'flux';
 
-var Dispatcher = Flux.Dispatcher,
-    appDispatcher = new Dispatcher();
+class AppDispatcher extends Dispatcher {
+    handleViewAction(action) {
+        this.dispatch({
+            source: 'VIEW_ACTION',
+            action: action
+        });
+    }
+    handleAPIAction(action) {
+        this.dispatch({
+            source: 'API_ACTION',
+            action: action
+        });
+    }
+}
 
-appDispatcher.handleViewAction = (action) => {
-    appDispatcher.dispatch({
-    	source: 'VIEW_ACTION',
-    	action: action
-    });
-};
+let _AppDispatcher = new AppDispatcher();
 
-appDispatcher.handleAPIAction = (action) => {
-    appDispatcher.dispatch({
-    	source: 'API_ACTION',
-    	action: action
-    });
-};
-
-module.exports = appDispatcher;
+export default _AppDispatcher;
