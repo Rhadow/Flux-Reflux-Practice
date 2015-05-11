@@ -1,8 +1,10 @@
 'use strict';
 
 var constants = {
-	ADD_USER: 'ADD_USER',
-	DELETE_USER: 'DELETE_USER'
+	APP_ADD_USER: 'APP_ADD_USER',
+	APP_DELETE_USER: 'APP_DELETE_USER',
+	GITHUB_GET_USER_SUCCESS: 'GITHUB_GET_USER_SUCCESS',
+	GITHUB_GET_USER_FAIL: 'GITHUB_GET_USER_FAIL'
 };
 
-module.exports = constants;
+export default constants;

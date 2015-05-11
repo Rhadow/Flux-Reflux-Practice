@@ -1,56 +1,70 @@
 'use strict';
 
-var appDispatcher = require('../dispatcher/dispatcher.js');
-var eventEmitter = require('events').EventEmitter;
-var constants = require('../constants/constants.js');
-var _ = require('underscore');
+import appDispatcher from '../dispatcher/dispatcher.js';
+import {EventEmitter} from 'events';
+import constants from '../constants/constants.js';
+import Immutable from 'immutable';
 
-var _userList = [{
-    name: 'Howard',
-    age: 27
-}, {
-    name: 'Shaun',
-    age: 22
-}, {
-    name: 'Amy',
-    age: 26
-}];
+class AppStore extends EventEmitter {
 
-var appStore = _.extend({}, eventEmitter.prototype, {
-    getUserList: function() {
-        return _userList;
-    },
-    addUser: function(user) {
-        _userList.push(user);
-    },
-    deleteUser: function(index) {
-        _userList.splice(index, 1);
-    },
-    emitChange: function() {
+    constructor() {
+        super();
+        let _this = this;
+        _this._userList = Immutable.fromJS(
+            [{
+                name: 'Howard',
+                age: 27
+            }, {
+                name: 'Shaun',
+                age: 22
+            }, {
+                name: 'Amy',
+                age: 26
+            }]
+        );
+    }
+
+    getUserList() {
+        return this._userList;
+    }
+
+    addUser(user) {
+        this._userList = this._userList.push(Immutable.fromJS(user));
+    }
+
+    deleteUser(index) {
+        this._userList = this._userList.splice(index, 1);
+    }
+
+    emitChange() {
         this.emit('change');
-    },
-    addChangeListener: function(callback) {
-        this.on('change', callback);
-    },
-    removeChangeListener: function(callback) {
-        this.removeListener('change', callback);
-    },
-});
+    }
 
-appDispatcher.register(function(payload) {
-    var action = payload.action;
+    addChangeListener(callback) {
+        this.on('change', callback);
+    }
+
+    removeChangeListener(callback) {
+        this.removeListener('change', callback);
+    }
+}
+
+let _AppStore = new AppStore();
+
+_AppStore.dispatchToken = appDispatcher.register((payload) => {
+    let action = payload.action;
     switch (action.actionType) {
-        case constants.ADD_USER:
-            appStore.addUser(action.data);
+        case constants.APP_ADD_USER:
+            _AppStore.addUser(action.data);
             break;
-        case constants.DELETE_USER:
-            appStore.deleteUser(action.data);
+        case constants.APP_DELETE_USER:
+            _AppStore.deleteUser(action.data);
             break;
         default:
             return true;
     }
-    appStore.emitChange();
+    _AppStore.emitChange();
     return true;
 });
 
-module.exports = appStore;
+export default _AppStore;

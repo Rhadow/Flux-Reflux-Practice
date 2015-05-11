@@ -1,41 +1,61 @@
-/** @jsx React.DOM */
-
 'use strict';
 
-var React = require('react'),
-    UserList = require('./components/UserList.js'),
-    Input = require('./components/Input.js'),
-    appStore = require('./stores/appStore.js'),
-    ExampleApp;
+//Libraries
+import React from 'react';
 
-ExampleApp = React.createClass({
-    getInitialState: function(){
-        return {
-            users: appStore.getUserList()
-        };        
-    },
-    componentWillMount: function(){
-        appStore.addChangeListener(this._onChange);
-    },
-    componentWillUnmount: function(){
-        appStore.removeChangeListener(this._onChange);
-    },
-    render: function() {
+// Components
+import BaseComponent from './components/BaseComponent.js';
+import UserList from './components/UserList.js';
+import Input from './components/Input.js';
+import SearchBar from './components/SearchBar.js';
+import GithubInfo from './components/GithubInfo.js';
+
+//Store
+import AppStore from './stores/AppStore.js';
+import GithubStore from './stores/GithubStore.js';
+import ErrorStore from './stores/ErrorStore.js';
+
+
+class ExampleApp extends BaseComponent{
+    constructor(props) {
+        super(props);
+        this.state = {
+            users: AppStore.getUserList(),
+            githubInfo: GithubStore.getCurrentInfo()
+        };
+        this._bind('_onChange');
+    }
+    componentWillMount() {
+        AppStore.addChangeListener(this._onChange);
+        GithubStore.addChangeListener(this._onChange);
+    }
+    componentWillUnmount() {
+        AppStore.removeChangeListener(this._onChange);
+        GithubStore.removeChangeListener(this._onChange);
+    }
+    _onChange() {
+        this.setState({
+            users: AppStore.getUserList(),
+            githubInfo: GithubStore.getCurrentInfo()
+        });
+        if(ErrorStore.getErrorNames().length){
+            console.log(`Error names: ${ErrorStore.getErrorNames()}`);
+        }
+    }
+    render() {
         return (
-        	/*jshint ignore:start */
+            /*jshint ignore:start */
             <div>
                 <UserList users={this.state.users}/>
-            	<Input />
+                <Input />
+                <hr/>
+                <SearchBar/>
+                <GithubInfo data={this.state.githubInfo}/>
             </div>
             /*jshint ignore:end */
         );
-    },
-    _onChange: function(){
-        this.setState({
-            users: appStore.getUserList()
-        });
     }
-});
+}
 
 React.render(
     /*jshint ignore:start */

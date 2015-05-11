@@ -1,21 +1,21 @@
 'use strict';
 
-var appDispatcher = require('../dispatcher/dispatcher.js');
-var constants = require('../constants/constants.js');
+import appDispatcher from '../dispatcher/dispatcher.js';
+import constants from '../constants/constants.js';
 
 var appActions = {
-	addUser: function(user){
+	addUser(user) {
 		appDispatcher.handleViewAction({
-			actionType: constants.ADD_USER,
+			actionType: constants.APP_ADD_USER,
 			data: user
 		});
 	},
-	deleteUser: function(index){
+	deleteUser(index) {
 		appDispatcher.handleViewAction({
-			actionType: constants.DELETE_USER,
+			actionType: constants.APP_DELETE_USER,
 			data: index
 		});
 	}
 };
 
-module.exports = appActions;
+export default appActions;
