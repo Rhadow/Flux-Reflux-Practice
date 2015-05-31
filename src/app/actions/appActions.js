@@ -15,6 +15,18 @@ var appActions = {
 			actionType: constants.APP_DELETE_USER,
 			data: index
 		});
+	},
+	clearGithubUserInfo () {
+		appDispatcher.handleViewAction({
+			actionType: constants.GITHUB_CLEAR_USER_INFO,
+			data: null
+		});
+	},
+	updateLoadingState(state) {
+		appDispatcher.handleViewAction({
+			actionType: constants.LOADING_UPDATE_STATE,
+			data: state
+		});
 	}
 };
 

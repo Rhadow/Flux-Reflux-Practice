@@ -24,6 +24,10 @@ class GithubStore extends EventEmitter {
         }
     }
 
+    clearUserInfo() {
+        this._currentInfo = Immutable.fromJS({});
+    }
+
     emitChange() {
         this.emit('change');
     }
@@ -44,6 +48,9 @@ _GithubStore.dispatchToken = appDispatcher.register((payload) => {
     switch (action.actionType) {
         case constants.GITHUB_GET_USER_SUCCESS:
             _GithubStore.saveInfo(action.data);
+            break;
+        case constants.GITHUB_CLEAR_USER_INFO:
+            _GithubStore.clearUserInfo();
             break;
         default:
             return true;
