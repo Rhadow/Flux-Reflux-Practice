@@ -3,6 +3,7 @@
 import React from 'react';
 import BaseComponent from './BaseComponent.js';
 import apiActions from '../actions/apiActions.js';
+import appActions from '../actions/appActions.js';
 
 class SearchBar extends BaseComponent {
 
@@ -20,6 +21,8 @@ class SearchBar extends BaseComponent {
 		let accountToSearch = React.findDOMNode(this.refs.account).value;
 		if(accountToSearch){
             React.findDOMNode(this.refs.account).value = '';
+            appActions.clearGithubUserInfo();
+            appActions.updateLoadingState(true);
             apiActions.getGithubInfo(accountToSearch);
         }
     }

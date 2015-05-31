@@ -4,7 +4,12 @@ img {
     width: 128px;
     height: 128px;
 }
+
 ul {
     display: inline-block;
     vertical-align: middle;
+}
+
+.hide {
+    display: none;
 }
