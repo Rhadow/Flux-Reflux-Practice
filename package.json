@@ -10,6 +10,7 @@
     "underscore": "^1.7.0"
   },
   "devDependencies": {
+    "babel-loader": "^5.1.2",
     "gulp": "~3.8.8",
     "gulp-autoprefixer": "~1.0.0",
     "gulp-bower": "0.0.6",
@@ -27,9 +28,11 @@
     "jquery": "^2.1.4",
     "jshint-stylish": "0.4.0",
     "react": "^0.13.0",
+    "react-hot-loader": "^1.2.7",
     "react-tools": "^0.13.2",
     "reactify": "~0.15.2",
     "reflux": "~0.1.13",
+    "webpack-dev-server": "^1.8.2",
     "wiredep": "~1.8.5"
   },
   "engines": {
